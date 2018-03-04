@@ -9,12 +9,6 @@ GAME RULES:
 
 */
 
-var scores, roundScore, activePlayer;
-
-scores = [0,0];
-roundScore = 0;
-activePlayer = 1; //0 is the first player and 1 is the second player
-
 //The querySelector() method returns the first element that matches a specified CSS selector(s) in the document
 
 //The textContent property sets or returns the textual content(as it is) of the specified node, and all its descendants.
@@ -27,12 +21,20 @@ activePlayer = 1; //0 is the first player and 1 is the second player
 //document.querySelector('#current-' + activePlayer).textContent = '<em>' + dice + '</em>';     
 //will output plain text: <em>3</em>
 
+var scores, roundScore, activePlayer;
 
-var x = document.querySelector('#score-0').textContent; // it's getter because i get a value
-console.log(x);
+scores = [0,0];
+roundScore = 0;
+activePlayer = 0; // 0: player1 begins, 1: player2 plays
 
 document.querySelector('.dice').style.display = 'none'; //hide an element
 //style method then display is the css property and none the css value
+
+document.getElementById('score-0').textContent = '0';
+document.getElementById('score-1').textContent = '0';
+document.getElementById('current-0').textContent = '0';
+document.getElementById('current-1').textContent = '0';
+    
 
 document.querySelector('.btn-roll').addEventListener('click', function(){
                                                     
@@ -43,6 +45,31 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
     var diceDOM = document.querySelector('.dice');
     diceDOM.style.display = 'block';
     diceDOM.src = 'dice-' + dice + '.png'
+    
+    // 3. Update the round score IF the rolled number was NOT a 1
+    if(dice !== 1){
+        roundScore += dice;
+        document.querySelector('#current-' + activePlayer).textContent = roundScore; 
+    }else{
+        // Next player
+        document.querySelector('.dice').style.display = 'none';
+        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+        roundScore = 0;
+        
+        document.getElementById('current-0').textContent = '0';
+        document.getElementById('current-1').textContent = '0';
+        
+        /*
+        Toggle
+        The first parameter removes the specified class from an element, and returns false. 
+        If the class does not exist, it is added to the element, and the return value is true.
+        */
+        document.querySelector('.player-0-panel').classList.toggle('active');
+        document.querySelector('.player-1-panel').classList.toggle('active');
+        
+
+
+    }
      
 });
 
