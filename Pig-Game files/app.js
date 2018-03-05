@@ -23,18 +23,11 @@ GAME RULES:
 
 var scores, roundScore, activePlayer;
 
-scores = [0,0];
+/*scores = [0,0];
 roundScore = 0;
-activePlayer = 0; // 0: player1 begins, 1: player2 plays
+activePlayer = 0; // 0: player1 begins, 1: player2 plays*/
 
-document.querySelector('.dice').style.display = 'none'; //hide an element
-//style method then display is the css property and none the css value
-
-document.getElementById('score-0').textContent = '0';
-document.getElementById('score-1').textContent = '0';
-document.getElementById('current-0').textContent = '0';
-document.getElementById('current-1').textContent = '0';
-    
+startingGame();
 
 
 //ROLL DICE EVENT
@@ -68,19 +61,40 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
     
     //Check if player won the game
     if(scores[activePlayer] >= 20){
-        deferAlert();
-        //console.log(activePlayer);
+        document.querySelector('#name-' + activePlayer).textContent = 'WINNER !'; 
     }else{
         nextPlayer();
     }
 });
 
 
+document.querySelector('.btn-new').addEventListener('click', function(){
+    document.querySelector('.player-0-panel').classList.add('active');
+    document.querySelector('.player-1-panel').classList.remove('active');
 
-function deferAlert() {
-    setTimeout(function(){ alert('The winner is Player ' + (activePlayer + 1) + ' with ' +scores[activePlayer]+ ' points'); }, 500);
+    startingGame();   
+    
+})
+
+
+
+//External functions
+
+function startingGame(){
+    scores = [0,0];
+    roundScore = 0;
+    activePlayer = 0; // 0: player1 begins, 1: player2 plays
+
+    document.querySelector('#name-0').textContent = 'Player 1'; 
+    document.querySelector('#name-1').textContent = 'Player 2';
+    document.querySelector('.dice').style.display = 'none'; //hide an element
+    //style method then display is the css property and none the css value
+
+    document.getElementById('score-0').textContent = '0';
+    document.getElementById('score-1').textContent = '0';
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
 }
-
 
 function nextPlayer(){
     // Next player
