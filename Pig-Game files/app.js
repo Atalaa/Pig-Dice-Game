@@ -36,6 +36,8 @@ document.getElementById('current-0').textContent = '0';
 document.getElementById('current-1').textContent = '0';
     
 
+
+//ROLL DICE EVENT
 document.querySelector('.btn-roll').addEventListener('click', function(){
                                                     
     // 1. Random number                                                    
@@ -49,13 +51,42 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
     // 3. Update the round score IF the rolled number was NOT a 1
     if(dice !== 1){
         roundScore += dice;
-        document.querySelector('#current-' + activePlayer).textContent = roundScore; 
+        document.querySelector('#current-' + activePlayer).textContent = roundScore; //score in this round
     }else{
-        // Next player
+        nextPlayer();
+    }
+});
+
+//HOLD EVENT
+document.querySelector('.btn-hold').addEventListener('click', function(){
+        
+    // 1. Add the current score to the global score
+    scores[activePlayer] += roundScore;
+
+    // 2. Update the UI
+    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+    
+    //Check if player won the game
+    if(scores[activePlayer] >= 20){
+        deferAlert();
+        //console.log(activePlayer);
+    }else{
+        nextPlayer();
+    }
+});
+
+
+
+function deferAlert() {
+    setTimeout(function(){ alert('The winner is Player ' + (activePlayer + 1) + ' with ' +scores[activePlayer]+ ' points'); }, 500);
+}
+
+
+function nextPlayer(){
+    // Next player
         document.querySelector('.dice').style.display = 'none';
         activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
         roundScore = 0;
-        
         document.getElementById('current-0').textContent = '0';
         document.getElementById('current-1').textContent = '0';
         
@@ -65,18 +96,8 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
         If the class does not exist, it is added to the element, and the return value is true.
         */
         document.querySelector('.player-0-panel').classList.toggle('active');
-        document.querySelector('.player-1-panel').classList.toggle('active');
-        
-
-
-    }
-     
-});
-
-
-
-
-
+        document.querySelector('.player-1-panel').classList.toggle('active');   
+};
 
 
 
