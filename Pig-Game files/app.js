@@ -22,11 +22,6 @@ GAME RULES:
 //will output plain text: <em>3</em>
 
 var scores, roundScore, activePlayer;
-
-/*scores = [0,0];
-roundScore = 0;
-activePlayer = 0; // 0: player1 begins, 1: player2 plays*/
-
 startingGame();
 
 
@@ -62,24 +57,25 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
     //Check if player won the game
     if(scores[activePlayer] >= 20){
         document.querySelector('#name-' + activePlayer).textContent = 'WINNER !'; 
+        document.querySelector('.dice').style.display = 'none';
+        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+        
     }else{
         nextPlayer();
     }
 });
 
-
+//NEW GAME EVENT
 document.querySelector('.btn-new').addEventListener('click', function(){
     document.querySelector('.player-0-panel').classList.add('active');
     document.querySelector('.player-1-panel').classList.remove('active');
-
     startingGame();   
-    
 })
 
 
 
-//External functions
-
+//EXTERNAL FUNCTIONS
 function startingGame(){
     scores = [0,0];
     roundScore = 0;
@@ -87,9 +83,6 @@ function startingGame(){
 
     document.querySelector('#name-0').textContent = 'Player 1'; 
     document.querySelector('#name-1').textContent = 'Player 2';
-    document.querySelector('.dice').style.display = 'none'; //hide an element
-    //style method then display is the css property and none the css value
-
     document.getElementById('score-0').textContent = '0';
     document.getElementById('score-1').textContent = '0';
     document.getElementById('current-0').textContent = '0';
@@ -98,19 +91,18 @@ function startingGame(){
 
 function nextPlayer(){
     // Next player
-        document.querySelector('.dice').style.display = 'none';
-        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-        roundScore = 0;
-        document.getElementById('current-0').textContent = '0';
-        document.getElementById('current-1').textContent = '0';
-        
-        /*
-        Toggle
-        The first parameter removes the specified class from an element, and returns false. 
-        If the class does not exist, it is added to the element, and the return value is true.
-        */
-        document.querySelector('.player-0-panel').classList.toggle('active');
-        document.querySelector('.player-1-panel').classList.toggle('active');   
+    document.querySelector('.dice').style.display = 'none';
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+    roundScore = 0;
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
+    document.querySelector('.player-0-panel').classList.toggle('active');
+    document.querySelector('.player-1-panel').classList.toggle('active');   
+    /*
+    Toggle
+    The first parameter removes the specified class from an element, and returns false. 
+    If the class does not exist, it is added to the element, and the return value is true.
+    */
 };
 
 
