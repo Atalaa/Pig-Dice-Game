@@ -23,8 +23,8 @@ var intro = ' ***** Welcome to Pig Dice Game *****\n\nThe game has 2 players, pl
             + 'The player can choose to \'Hold\', which means that his ROUND score gets added to his GLOBAL score. After that, it\'s the next player\'s turn.\n\n'
             + 'The first player to reach 100 points on GLOBAL score wins the game.\n\n' + 'ENJOY !';
 
-alert(intro);
 startingGame();
+alert(intro);
 
 //ROLL DICE EVENT
 document.querySelector('.btn-roll').addEventListener('click', rollDice);
