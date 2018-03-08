@@ -14,4 +14,4 @@ GAME RULES:
 
 - Used Brackets code editor.
 
-ENJOY : https://atalapigdice.herokuapp.com/index.html
+ENJOY : www.atalapigdice.me
