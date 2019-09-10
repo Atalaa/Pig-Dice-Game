@@ -14,4 +14,4 @@ GAME RULES:
 
 - Used Brackets code editor.
 
-ENJOY : www.atalapigdice.me
+ENJOY : https://atalaa.github.io/Pig-Dice-Game/
